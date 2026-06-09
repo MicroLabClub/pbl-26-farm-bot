@@ -1,0 +1,73 @@
+@import "tailwindcss";
+
+/*
+  Palette — "field operations terminal"
+  Paper: #f5f1e8 (cream), #ebe5d4 (warm border)
+  Ink:   #1a1f1a (almost black), #4a5444 (muted)
+  Soil:  #8b6f47, #c9a876
+  Leaf:  #2d5016 (deep), #4a7c2c (mid), #7ba05b (sage)
+  Alert: #b34a3a (rust), #c9a032 (mustard)
+*/
+
+* { box-sizing: border-box; }
+
+html, body, #root { height: 100%; }
+
+body {
+  margin: 0;
+  background: #f5f1e8;
+  color: #1a1f1a;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-feature-settings: 'cv11', 'ss01', 'ss03';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.font-mono { font-family: 'JetBrains Mono', ui-monospace, monospace; font-feature-settings: 'zero', 'ss02'; }
+.font-display { font-family: 'Instrument Serif', Georgia, serif; font-weight: 400; }
+
+/* Subtle paper grain via radial gradient */
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background-image:
+    radial-gradient(circle at 1px 1px, rgba(26,31,26,0.03) 1px, transparent 0);
+  background-size: 24px 24px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+#root { position: relative; z-index: 1; }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #d4cdb8; border: 2px solid #f5f1e8; border-radius: 6px; }
+::-webkit-scrollbar-thumb:hover { background: #b8b09b; }
+
+/* Selection */
+::selection { background: #2d5016; color: #f5f1e8; }
+
+/* Links */
+a { color: inherit; text-decoration: none; }
+
+/* Reset native inputs */
+input, button, select, textarea {
+  font: inherit;
+  color: inherit;
+}
+
+/* Focus ring */
+*:focus-visible {
+  outline: 2px solid #2d5016;
+  outline-offset: 2px;
+}
+
+/* Print — hide nav when exporting crop passport as PDF */
+@media print {
+  nav, header, [data-no-print] { display: none !important; }
+  body { background: white; }
+  body::before { display: none; }
+}
