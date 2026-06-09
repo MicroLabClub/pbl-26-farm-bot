@@ -1,0 +1,13 @@
+services:
+  web:
+    build: .
+    image: farm-bot-26-web
+    container_name: farm-bot-26-web
+    # HARD CONSTRAINT: bind to 127.0.0.1:9002 only. nginx on the host
+    # reverse-proxies https://farm-bot-26.microlab.club -> 127.0.0.1:9002,
+    # and a DOCKER-USER iptables rule drops external traffic to 9001-9006.
+    # "9002:80" or "0.0.0.0:9002:80" would start fine but stay unreachable.
+    ports:
+      - "127.0.0.1:9002:80"
+    mem_limit: 512m
+    restart: unless-stopped
